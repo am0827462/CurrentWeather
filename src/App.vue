@@ -7,35 +7,36 @@
 <template>
   <div id="app" class="container">
     <Header theTitle="Current Weather" paragraph="Enter a valid five digit US Zip Code, select Celsius or Fahrenheit, and click 'Current Weather' button to see the current weather for the location."/>
+    <!-- Entry Form -->
     <form>
       <div class="form-row align-items-center">
-          <div class="col-auto">
-              <label class="sr-only" for="inlineFormInput">Zip Code</label>
-              <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Zip Code" v-model="zip">
+        <div class="col-auto">
+          <label class="sr-only" for="inlineFormInput">Zip Code</label>
+          <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Zip Code" v-model="zip">
+        </div>
+        <div class="col-auto">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="degrees" id="F" value="F" v-model="degrees" v-on:change="updateTemp()">
+            <label class="form-check-label" for="F">
+              Fahrenheit
+            </label>
           </div>
-          <div class="col-auto">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="degrees" id="F" value="F" v-model="degrees" v-on:change="updateTemp()">
-                <label class="form-check-label" for="F">
-                    Fahrenheit
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="degrees" id="C" value="C" v-model="degrees" v-on:change="updateTemp()">
-                <label class="form-check-label" for="C">
-                    Celsius
-                </label>
-            </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="degrees" id="C" value="C" v-model="degrees" v-on:change="updateTemp()">
+            <label class="form-check-label" for="C">
+              Celsius
+            </label>
           </div>
-          <div class="col-auto">
-              <button type="button" class="btn btn-primary mb-2" v-on:click="validateZip()">Current Weather</button>
-          </div>
-          </div>
-            <!-- Error Message -->
-            <div v-if="error !== null">
-                <h5 style="color:red">{{error}}</h5>
-            </div>
-      </form>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn mb-2" id="button" v-on:click="validateZip()">Current Weather</button>
+        </div>
+      </div>
+      <!-- Error Message -->
+      <div v-if="error !== null">
+        <h5 style="color:red">{{error}}</h5>
+      </div>
+    </form>
     <div v-if="error === null && temp !== null">
     <Card v-bind:cityprop="city" v-bind:degreesprop="degrees" v-bind:tempprop="temp" v-bind:currentprop="current" v-bind:iconprop="icon" v-bind:descprop="description"/>
     </div>
@@ -64,21 +65,23 @@ export default {
       degrees: "F",
       temp: null,
       error: null,
-      regex: /\b\d{5}\b/g
+      regex: /\b\d{5}\b/
     }
   },
   methods: {
     //Validates Zip code before API call
     validateZip(){
+
         if(this.zip === ""){
             this.error = "Please enter a zip code."
         }
-        else if (this.regex.test(this.zip)===false){
-            this.error = "Zip code must be five digits."
+        else if (this.regex.test(this.zip) === true){
+            this.error = null
+            this.apiCall()
         }
         else{
-        this.error = null
-        this.apiCall()}
+          this.error = "Zip code must be five digits."
+        }
     },
 
     //Toggle from F to C changes already displayed temp and called during inital api
@@ -120,5 +123,9 @@ export default {
 body{
   background-image: url('./assets/background.jpg');
   background-size: cover;
+}
+#button{
+  background-color:rgb(166, 57, 196);
+  color: white;
 }
 </style>

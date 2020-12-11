@@ -5,7 +5,7 @@
 -->
 
 <template>
-    <div class="jumbotron bg-secondary text-white">
+    <div class="jumbotron text-white">
         <h1>{{theTitle}}</h1>
         <p>{{paragraph}}</p>
     </div>
@@ -17,3 +17,9 @@ export default {
     props: ['theTitle','paragraph']
 }
 </script>
+
+<style scoped>
+.jumbotron{
+    background-color:rgb(166, 57, 196);
+}
+</style>

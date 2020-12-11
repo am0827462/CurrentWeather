@@ -5,20 +5,20 @@
 -->
 
 <template>
-    <div class="card mb-3 bg-secondary text-white" style="max-width: 540px;">
+    <div class="card mb-3" id="card">
         <div class="row no-gutters">
-        <div class="col-md-4">
-        <img v-bind:src="'http://openweathermap.org/img/wn/' + iconprop + '@2x.png'" class="card-img-top" alt="icon">
+            <div class="col-md-4">
+                <img v-bind:src="'http://openweathermap.org/img/wn/' + iconprop + '@2x.png'" class="card-img-top" alt="icon">
+            </div>
+            <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{cityprop}} Current Conditions</h5>
+                <p class="card-text">Temperature: {{tempprop}}° {{degreesprop}}</p>
+                <p class="card-text">Description: {{currentprop}}</p>
+                <p class="card-text">Detail: {{descprop}}</p>
+            </div>   
+            </div>
         </div>
-        <div class="col-md-8">
-        <div class="card-body">
-            <h5 class="card-title">{{cityprop}} Current Conditions</h5>
-            <p class="card-text">Temperature: {{tempprop}}° {{degreesprop}}</p>
-            <p class="card-text">Description: {{currentprop}}</p>
-            <p class="card-text">Detail: {{descprop}}</p>
-        </div>   
-    </div>
-    </div>
     </div>
 </template>
 
@@ -28,3 +28,11 @@ export default {
     props:['cityprop','tempprop','degreesprop','currentprop','iconprop','descprop']
 }
 </script>
+
+<style scoped>
+#card{
+    background-color:rgb(166, 57, 196);
+    max-width: 540px;
+    color:white;
+}
+</style>
