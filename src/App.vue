@@ -100,7 +100,7 @@ export default {
     apiCall(){
     this.temp = null
     //Use Axios to grab weather using zip entered in form
-    axios.get("http://api.openweathermap.org/data/2.5/weather?zip=" + this.zip +",us&appid=c234a81ae7d1d5eba19ea29fb50f695e")
+    axios.get("https://api.openweathermap.org/data/2.5/weather?zip=" + this.zip +",us&appid=c234a81ae7d1d5eba19ea29fb50f695e")
     .then((response) => {
         //Place weather data into variables
         this.tempKelvin = response.data.main.temp
